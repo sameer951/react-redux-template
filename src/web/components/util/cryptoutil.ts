@@ -6,8 +6,13 @@ export class CryptoUtil {
         return CryptoJS.AES.encrypt(JSON.stringify(data), key).toString()
     }
     public static decryptData(data: string, key: string = this.key) {
-        let bytes = CryptoJS.AES.decrypt(data, key)
-        return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));;
+        if (data) {
+            let _v = CryptoJS.AES.decrypt(data, key)?.toString(CryptoJS.enc.Utf8);
+            return _v && typeof _v === 'string' ? JSON.parse(_v) : null;
+        }
+        return null;
     }
+
+    
 
 }
