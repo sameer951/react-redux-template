@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 
-export default class Meta extends Component {
+export class Meta extends Component {
     props: any;
 
     private config = {

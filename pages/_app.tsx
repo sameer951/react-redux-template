@@ -7,6 +7,7 @@ import Router from 'next/router';
 import Cookies from "js-cookie";
 import ToastComponent from '../src/web/components/util/toast/toast.component';
 import ErrorBoundary from '../src/web/components/util/errorboundary/errorboundary.component';
+import { Meta } from '../src/web/layout/meta.component';
 
 const isSSR = typeof window === "undefined";
 export default function App({ Component, pageProps }) {
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => { if (!isSSR) initialize({ store }) }, [])
 
   return (<>
+    <Meta></Meta>
     {<ErrorBoundary><ToastComponent /></ErrorBoundary>/**sample use*/}
     <Provider store={store}>
       {!isForceCSRLoad ? <Component {...pageProps} /> : 'Loading ...'}
