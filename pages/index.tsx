@@ -10,16 +10,20 @@ const Index = () => {
   useEffect(() => {
     dispatch(startClock())
   }, [dispatch])
-  useEffect(()=>{
-      let url = '/typicode/demo/posts';
-      axiosInstance.get(url).then(data => {console.log('fetched==>',data);})
-    },[])
+  useEffect(() => {
+    let url = '/typicode/demo/posts';
+    axiosInstance.get(url).then(data => { console.log('fetched==>', data); })
+  }, [])
 
   return (
     <>
       <Examples />
       <Link href="/show-redux-state">
         <a>Click to see current Redux State</a>
+      </Link>
+      <br /> <br />
+      <Link href="/next-page">
+        <a>Click to see current NextJS Documentation</a>
       </Link>
     </>
   )
