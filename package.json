@@ -3,7 +3,13 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "clean:next": "npx rimraf -- .next&&npx rimraf -- out",
+    "clean:next:cache": "npx rimraf -- .next/cache",
+    "build:csr": "npm run clean:next && next build && next export",
+    "build:ssr": "npm run clean:next && next  build&&npm run clean:next:cache",
+    "serve:csr": "http-server out -c-1 --cors",
+    "serve:ssr":"next start"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -20,6 +26,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "http-server": "^0.12.3",
+    "rimraf": "^3.0.2",
     "typescript": "^4.3.5"
   }
 }
