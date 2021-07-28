@@ -1,22 +1,33 @@
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Link from 'next/link'
 import { startClock } from '../src/web/redux/actions/actions'
 import Examples from '../src/web/components/examples';
 import { axiosInstance } from '../src/web/helper/axios.util';
+import { Paginations } from '../src/web/components/util/pagination/pagination.component';
+import { usePaginations } from '../src/web/components/util/pagination/usePagination.hook';
 
-const Index = () => {
-  const dispatch = useDispatch()
+const Index = ({ posts }) => {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(startClock())
-  }, [dispatch])
-  useEffect(() => {
-    let url = '/typicode/demo/posts';
-    axiosInstance.get(url).then(data => { console.log('fetched==>', data); })
-  }, [])
+  }, [dispatch]);
+
+  const viewHandler = (pd, index) => {
+    return <React.Fragment key={index + Math.floor(Math.random())}>
+      <p>{pd.title}</p>
+      <img src={pd.thumbnailUrl} alt="" />
+    </React.Fragment>
+  }
+
+  const { updateConfig, pagination, viewList, snipedData } = usePaginations({ data: posts, UIHandler: viewHandler });
 
   return (
     <>
+      <>{viewList}</>
+      <>{pagination}</>
+      <>{snipedData.map(viewHandler)}</>
+      {/* <Paginations data={posts} UIHandler={viewHandler}></Paginations> */}
       <Examples />
       <Link href="/show-redux-state">
         <a>Click to see current Redux State</a>
@@ -27,6 +38,14 @@ const Index = () => {
       </Link>
     </>
   )
+}
+export async function getStaticProps() {
+  let url = '/photos';
+  const res = await axiosInstance.get(url)
+  // const res = await fetch('https://api.github.com/repos/developit/preact')
+  // const json = await res.json()
+
+  return { props: { posts: res }, }
 }
 
 export default Index

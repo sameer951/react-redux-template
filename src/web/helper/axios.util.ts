@@ -1,7 +1,7 @@
 import axios from "axios";
 import { StorageService } from "../components/util/storage.service";
 
-const BASE_URL = "https://my-json-server.typicode.com";
+const BASE_URL = "https://jsonplaceholder.typicode.com";
 const AxiosInstance = axios.create({
     baseURL: BASE_URL, headers: { 'x-token': StorageService.generateRandomToken() }
 });
