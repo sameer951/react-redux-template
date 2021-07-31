@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const layout1List = ['/next-page'];
-const layout2List = ['/show-redux-state'];
+const layout2List = ['/demo/show-redux-state'];
 
 
 function _layout({ children }) {
