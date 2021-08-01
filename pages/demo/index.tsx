@@ -23,10 +23,10 @@ const Index = ({ posts }) => {
   const { updateConfig, pagination, viewList, snipedData } = usePaginations({ data: posts, UIHandler: viewHandler });
 
   return (
-    <>
-      <>{viewList}</>
+    <>      
       <>{pagination}</>
       <>{snipedData.map(viewHandler)}</>
+      {/* <>{viewList}</> */}
       {/* <Paginations data={posts} UIHandler={viewHandler}></Paginations> */}
       <Examples />
       <Link href="/demo/show-redux-state">
