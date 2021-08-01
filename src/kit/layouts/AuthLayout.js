@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import RouterLink from 'next/link'
 // material
 import { styled } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
@@ -35,7 +35,7 @@ AuthLayout.propTypes = {
 export default function AuthLayout({ children }) {
   return (
     <HeaderStyle>
-      <RouterLink to="/">
+      <RouterLink href="/" passHref>
         <Logo />
       </RouterLink>
 

@@ -1,4 +1,4 @@
-import { Link as RouterLink } from 'react-router-dom';
+import RouterLink from 'next/link'
 // material
 import { styled } from '@material-ui/core/styles';
 import { Card, Stack, Link, Container, Typography } from '@material-ui/core';
@@ -44,9 +44,11 @@ export default function Login() {
     <RootStyle title="Login | Minimal-UI">
       <AuthLayout>
         Don’t have an account? &nbsp;
-        <Link underline="none" variant="subtitle2" component={RouterLink} to="/register">
-          Get started
-        </Link>
+        <RouterLink href="/register" passHref>
+          {/* <Link underline="none" variant="subtitle2" component="a"> */}
+            Get started
+          {/* </Link> */}
+        </RouterLink>
       </AuthLayout>
 
       <MHidden width="mdDown">
@@ -73,9 +75,11 @@ export default function Login() {
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
               Don’t have an account?&nbsp;
-              <Link variant="subtitle2" component={RouterLink} to="register">
-                Get started
-              </Link>
+              <RouterLink href="/register" passHref>
+                {/* <Link variant="subtitle2" component="a" > */}
+                  Get started
+                {/* </Link> */}
+              </RouterLink>
             </Typography>
           </MHidden>
         </ContentStyle>

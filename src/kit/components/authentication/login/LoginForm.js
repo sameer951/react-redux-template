@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
 import eyeFill from '@iconify/icons-eva/eye-fill';
@@ -16,11 +15,13 @@ import {
   FormControlLabel
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
+import { useRouter } from 'next/router';
+import RouterLink from 'next/link'
 
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const LoginSchema = Yup.object().shape({
@@ -36,7 +37,8 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+      router.replace('/dashboard');
+      // navigate('/dashboard', { replace: true });
     }
   });
 
@@ -85,10 +87,12 @@ export default function LoginForm() {
             control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
             label="Remember me"
           />
+          <RouterLink href="#" passHref>
+            {/* <Link component="a" variant="subtitle2" > */}
+              Forgot password?
+            {/* </Link> */}
+          </RouterLink>
 
-          <Link component={RouterLink} variant="subtitle2" to="#">
-            Forgot password?
-          </Link>
         </Stack>
 
         <LoadingButton

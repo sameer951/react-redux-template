@@ -1,14 +1,14 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 export default function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { asPath } = useRouter();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [asPath]);
 
   return null;
 }
