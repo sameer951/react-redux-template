@@ -17,7 +17,7 @@ const ShowReduxState = () => {
       <pre style={codeStyle}>
         <code>{JSON.stringify(state, null, 4)}</code>
       </pre>
-      <Link href="/">
+      <Link href="/demo">
         <a>Go Back Home</a>
       </Link>
     </>

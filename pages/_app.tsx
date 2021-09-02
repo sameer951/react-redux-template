@@ -8,18 +8,22 @@ import Cookies from "js-cookie";
 import ToastComponent from '../src/web/components/util/toast/toast.component';
 import ErrorBoundary from '../src/web/components/util/errorboundary/errorboundary.component';
 import { Meta } from '../src/web/layout/meta.component';
+import { LocalLayout } from '../src/web/layout/layout.component';
 
 const isSSR = typeof window === "undefined";
 export default function App({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
-  const [isForceCSRLoad, setCSRLoad] = useState(false);
-  useEffect(() => { if (!isSSR) initialize({ store }) }, [])
-
+  const isForceCSRLoad = false;
+  const [isMounted, setMount] = useState(false);
+  useEffect(() => {
+    if (!isSSR) initialize({ store });
+    setMount(true);
+  }, [])
   return (<>
     <Meta></Meta>
     {<ErrorBoundary><ToastComponent /></ErrorBoundary>/**sample use*/}
     <Provider store={store}>
-      {!isForceCSRLoad ? <Component {...pageProps} /> : 'Loading ...'}
+      {!isForceCSRLoad || (!isSSR && isMounted) ? <LocalLayout><Component {...pageProps} /></LocalLayout> : 'Loading ...'}
     </Provider>
   </>
   )

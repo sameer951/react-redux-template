@@ -44,6 +44,16 @@ export default class ToastComponent extends Component {
                 ...options
             });
     }
+    public static error(ErrorMessage = '', options = {}) {
+        if (ErrorMessage)
+            toast.error(ErrorMessage, {
+                autoClose: 2500,
+                closeOnClick: false,
+                className: "font-weight-bold text-white text-center",
+                position: "top-right",
+                ...options
+            });
+    }
     public static dismiss(id = '') {
         if (id === '') toast.dismiss();
         else toast.dismiss(id);
