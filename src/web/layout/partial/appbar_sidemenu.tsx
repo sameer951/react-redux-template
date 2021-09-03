@@ -5,19 +5,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
+import List from '@material-ui/core/List';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import { withStyles } from '@material-ui/styles';
-import { IconButton } from '@material-ui/core';
+import { IconButton, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { palette } from '../../styles/theme';
 
 const drawerWidth = 240;
 const style = (theme) => ({
@@ -33,18 +29,20 @@ const style = (theme) => ({
             display: 'none',
         },
     },
-    swipeableDrawer:{
+    swipeableDrawer: {
         [theme.breakpoints.up('md')]: {
             display: 'none',
         },
     },
     drawer: {
-       [theme.breakpoints.down('md')]: {
+        [theme.breakpoints.down('sm')]: {
             display: 'none',
         },
     },
     drawerPaper: {
         width: drawerWidth,
+        background: palette.side_menu.default,
+        color: palette.primary.main,
     },
     drawerContainer: {
         overflow: 'auto',
@@ -58,32 +56,23 @@ const style = (theme) => ({
     },
 })
 
-function ClippedDrawer({ classes, children }) {
+function ClippedDrawer({ classes, children, menuDom }) {
     // const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleHamburger = (val: any = 'undefined') => {
         if (val !== 'undefined') setOpen(!open);
         else setOpen(val);
     };
-    const showMenuDom = (<div className={classes.drawerContainer}>
-        <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
+    if (!menuDom) {
+        menuDom = <div className={classes.drawerContainer}>
+            <List>
+                <ListItem button key={'Menu Sample'}>
+                    <ListItemIcon><InboxIcon /> </ListItemIcon>
+                    <ListItemText primary={'Menu Sample'} />
                 </ListItem>
-            ))}
-        </List>
-        <Divider />
-        <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
-                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                    <ListItemText primary={text} />
-                </ListItem>
-            ))}
-        </List>
-    </div>);
+            </List>
+        </div>;
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -111,7 +100,8 @@ function ClippedDrawer({ classes, children }) {
                 className={classes.swipeableDrawer}
                 classes={{ paper: classes.drawerPaper, }}
             >
-               {showMenuDom}
+                <Toolbar />
+                {menuDom}
             </SwipeableDrawer>
             <Drawer
                 className={classes.drawer}
@@ -119,7 +109,7 @@ function ClippedDrawer({ classes, children }) {
                 classes={{ paper: classes.drawerPaper, }}
             >
                 <Toolbar />
-                {showMenuDom}
+                {menuDom}
             </Drawer>
             <main className={classes.content}>
                 <Toolbar />
