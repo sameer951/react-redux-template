@@ -9,6 +9,8 @@ import ToastComponent from '../src/web/components/util/toast/toast.component';
 import ErrorBoundary from '../src/web/components/util/errorboundary/errorboundary.component';
 import { Meta } from '../src/web/layout/meta.component';
 import { LocalLayout } from '../src/web/layout/layout.component';
+import { ThemeProvider } from '@material-ui/styles';
+import theme from '../src/web/styles/theme';
 
 const isSSR = typeof window === "undefined";
 export default function App({ Component, pageProps }) {
@@ -21,10 +23,12 @@ export default function App({ Component, pageProps }) {
   }, [])
   return (<>
     <Meta></Meta>
-    {<ErrorBoundary><ToastComponent /></ErrorBoundary>/**sample use*/}
-    <Provider store={store}>
-      {!isForceCSRLoad || (!isSSR && isMounted) ? <LocalLayout><Component {...pageProps} /></LocalLayout> : 'Loading ...'}
-    </Provider>
+    <ThemeProvider theme={theme}>
+      {<ErrorBoundary><ToastComponent /></ErrorBoundary>/**sample use*/}
+      <Provider store={store}>
+        {!isForceCSRLoad || (!isSSR && isMounted) ? <LocalLayout><Component {...pageProps} /></LocalLayout> : 'Loading ...'}
+      </Provider>
+    </ThemeProvider>
   </>
   )
 }

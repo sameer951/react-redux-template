@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { startClock } from '../src/web/redux/actions/actions'
 import Examples from '../src/web/components/examples'
 import { axiosInstance } from '../src/web/helper/axios.util'
+import { Typography } from '@material-ui/core'
 
 const Index = () => {
   const dispatch = useDispatch()
@@ -19,6 +20,9 @@ const Index = () => {
   return (
     <>
       <Examples />
+      <Typography variant="h5" component="h3" gutterBottom color="primary">
+          Next.js v5-beta with TypeScript example
+        </Typography>
     </>
   )
 }
