@@ -80,12 +80,8 @@ const style = (theme):any => ({
         },
     },
 });
-const useStyles = makeStyles(style);
 
 function PrimarySearchAppBar({ classes }) {
-    // const classes:style = useStyles();
-    // const { classes} = this.props;
-    
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
